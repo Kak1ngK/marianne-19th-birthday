@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ceb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Mah baby dooo</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Google Fonts for Clean Minimalist Aesthetic -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        themeBg: '#F8F6FF',
+                        cardBg: '#FFFFFF',
+                        textDark: '#2E2B38',
+                        textSubtle: '#787388',
+                        lavenderMain: '#D8B4FE',
+                        lavenderHover: '#C084FC',
+                        lavenderSoft: '#EDE9FE',
+                        borderLight: '#ECE6F9',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F8F6FF;
+            color: #2E2B38;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .minimal-card {
+            background: #FFFFFF;
+            border-radius: 28px;
+            border: 1px solid #ECE6F9;
+            box-shadow: 0 16px 40px -10px rgba(168, 85, 247, 0.07);
+        }
+
+        .btn-minimal {
+            background-color: #D8B4FE;
+            color: #2E2B38;
+            border-radius: 9999px;
+            font-weight: 700;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-minimal:hover {
+            background-color: #C084FC;
+            color: #FFFFFF;
+            transform: translateY(-1px);
+        }
+
+        .btn-minimal:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background-color: #EDE9FE;
+            color: #787388;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        /* Evasive Button Smooth Movement */
+        #evasiveNoBtn {
+            transition: top 0.2s ease-out, left 0.2s ease-out;
+            touch-action: none;
+        }
+
+        .color-dot {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s, border-width 0.1s;
+        }
+
+        .color-dot.selected {
+            border: 2px solid #2E2B38;
+            transform: scale(1.1);
+        }
+
+        /* Clean Scrollbar */
+        .custom-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #F8F6FF;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #DDD6FE;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 font-sans overflow-x-hidden select-none relative">
+
+    <!-- MAIN APP CONTAINER -->
+    <main id="appCard" class="w-full max-w-md minimal-card p-8 relative transition-all duration-300 z-10 my-auto">
+
+        <!-- ================= CARD 1 ================= -->
+        <section id="card1" class="text-center space-y-6 py-2">
+            <!-- Minimalist Lavender Flower Icon -->
+            <div class="flex justify-center pt-2">
+                <svg width="60" height="60" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Stem -->
+                    <path d="M 32 60 Q 32 35 32 20" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M 32 45 Q 24 40 20 42" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M 32 38 Q 40 33 44 35" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round"/>
+                    <!-- Lavender Buds -->
+                    <ellipse cx="32" cy="14" rx="4.5" ry="6.5" fill="#D8B4FE"/>
+                    <ellipse cx="27" cy="22" rx="4.5" ry="6" fill="#C084FC"/>
+                    <ellipse cx="37" cy="22" rx="4.5" ry="6" fill="#D8B4FE"/>
+                    <ellipse cx="26" cy="30" rx="4" ry="5.5" fill="#DDD6FE"/>
+                    <ellipse cx="38" cy="30" rx="4" ry="5.5" fill="#C084FC"/>
+                    <ellipse cx="32" cy="26" rx="4" ry="5.5" fill="#E9D5FF"/>
+                </svg>
+            </div>
+
+            <div class="space-y-2">
+                <p class="text-xs font-bold tracking-widest text-lavenderHover uppercase">PBORNDAYYY AYDAAAAA</p>
+                <h1 class="text-3xl font-extrabold tracking-tight text-textDark">
+                    Tiguwang naka WAHAHAHA
+                </h1>
+            </div>
+
+            <div class="pt-4">
+                <button onclick="goToCard(2)" class="w-full btn-minimal text-sm py-3.5 px-6">
+                    Click next to continue
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= CARD 2 ================= -->
+        <section id="card2" class="hidden text-center space-y-8 py-2">
+            <!-- Lavender Flower Icon -->
+            <div class="flex justify-center pt-2">
+                <svg width="50" height="50" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 32 60 Q 32 35 32 20" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round"/>
+                    <ellipse cx="32" cy="14" rx="4.5" ry="6.5" fill="#D8B4FE"/>
+                    <ellipse cx="27" cy="22" rx="4.5" ry="6" fill="#C084FC"/>
+                    <ellipse cx="37" cy="22" rx="4.5" ry="6" fill="#D8B4FE"/>
+                    <ellipse cx="32" cy="26" rx="4" ry="5.5" fill="#E9D5FF"/>
+                </svg>
+            </div>
+
+            <h2 class="text-2xl font-bold tracking-tight text-textDark leading-snug">
+                Happyyyy birthdayy mah baby do!(vlair) ready naka mo tiguwang??? <br>yes or no??
+            </h2>
+
+            <div class="relative min-h-[90px] flex items-center justify-center gap-4">
+                <!-- YES BUTTON -->
+                <button onclick="goToCard(3)" class="btn-minimal text-sm px-8 py-3.5 z-10">
+                    Yes
+                </button>
+
+                <!-- EVASIVE NO BUTTON -->
+                <button id="evasiveNoBtn" onmouseover="evadeNoButton()" onclick="evadeNoButton()" ontouchstart="evadeNoButton()" class="btn-secondary text-sm px-8 py-3.5 z-20">
+                    No
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= CARD 3 ================= -->
+        <section id="card3" class="hidden text-center space-y-6 py-2">
+            <!-- Lavender Flower Icon -->
+            <div class="flex justify-center pt-2">
+                <svg width="50" height="50" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 32 60 Q 32 35 32 20" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round"/>
+                    <ellipse cx="32" cy="14" rx="4.5" ry="6.5" fill="#D8B4FE"/>
+                    <ellipse cx="27" cy="22" rx="4.5" ry="6" fill="#C084FC"/>
+                    <ellipse cx="37" cy="22" rx="4.5" ry="6" fill="#D8B4FE"/>
+                    <ellipse cx="32" cy="26" rx="4" ry="5.5" fill="#E9D5FF"/>
+                </svg>
+            </div>
+
+            <div class="space-y-3">
+                <h2 class="text-2xl font-bold tracking-tight text-textDark leading-snug">
+                    19 naman ka minaw naka nako ha mag careful naka sa everything understood???
+                </h2>
+                <p class="text-xs font-semibold text-textSubtle">dapattt yesss</p>
+            </div>
+
+            <div class="pt-2">
+                <button onclick="goToCard(4)" class="w-full btn-minimal text-sm py-3.5 px-6">
+                    Yes
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= CARD 4 (VERIFICATION) ================= -->
+        <section id="card4" class="hidden space-y-6 py-2">
+            <div class="space-y-2">
+                <h2 class="text-xl font-bold tracking-tight text-textDark">
+                    how would i know na ikaw si vlair????
+                </h2>
+                <p class="text-xs text-textSubtle">
+                    please fill up ang sa ubos ayha ka maka proceed HUWAHAHA
+                </p>
+            </div>
+
+            <form onsubmit="handleCard4Submit(event)" class="space-y-5">
+                <div>
+                    <label class="block text-xs font-semibold text-textSubtle mb-2">pers wesyon</label>
+                    <input type="text" id="nameInput" required placeholder="Type your full name..." 
+                           class="w-full px-4 py-3 rounded-xl border border-borderLight focus:border-lavenderHover focus:outline-none bg-themeBg text-textDark text-sm">
+                </div>
+
+                <button type="submit" class="w-full btn-minimal text-sm py-3.5">
+                    Proceed
+                </button>
+            </form>
+        </section>
+
+        <!-- ================= CARD 5 (COLOR CHOICE) ================= -->
+        <section id="card5" class="hidden text-center space-y-6 py-2">
+            <div class="space-y-2">
+                <h2 class="text-xl font-bold tracking-tight text-textDark">
+                    sekandd say fav color nimo???
+                </h2>
+            </div>
+
+            <!-- Color Palette Circles -->
+            <div class="flex items-center justify-center gap-3 py-2">
+                <div onclick="selectColor(this)" class="color-dot bg-[#D8B4FE] selected"></div>
+                <div onclick="selectColor(this)" class="color-dot bg-[#FFB7B2]"></div>
+                <div onclick="selectColor(this)" class="color-dot bg-[#A2E8DD]"></div>
+                <div onclick="selectColor(this)" class="color-dot bg-[#FFE566]"></div>
+                <div onclick="selectColor(this)" class="color-dot bg-[#2E2B38]"></div>
+            </div>
+
+            <div class="space-y-4 pt-2">
+                <p class="text-xs text-textSubtle font-medium">
+                    Sankyowwwww!
+                </p>
+                <button onclick="goToCard(6)" class="w-full btn-minimal text-sm py-3.5">
+                    Proceed
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= CARD 6 (FINAL LETTER) ================= -->
+        <section id="card6" class="hidden space-y-5">
+            <!-- Top Flower Icon -->
+            <div class="flex justify-center pt-1">
+                <svg width="45" height="45" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 32 60 Q 32 35 32 20" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round"/>
+                    <ellipse cx="32" cy="14" rx="4.5" ry="6.5" fill="#D8B4FE"/>
+                    <ellipse cx="27" cy="22" rx="4.5" ry="6" fill="#C084FC"/>
+                    <ellipse cx="37" cy="22" rx="4.5" ry="6" fill="#D8B4FE"/>
+                    <ellipse cx="32" cy="26" rx="4" ry="5.5" fill="#E9D5FF"/>
+                </svg>
+            </div>
+
+            <div class="space-y-1 text-center">
+                <p class="text-xs font-bold tracking-widest text-lavenderHover uppercase">A LITTLE MESSAGE</p>
+                <h2 class="text-2xl font-extrabold tracking-tight text-textDark">Happy Birthday</h2>
+            </div>
+
+            <div class="bg-themeBg border border-borderLight rounded-2xl p-5 text-xs text-textDark leading-relaxed max-h-[280px] overflow-y-auto custom-scroll">
+                <p class="whitespace-pre-line text-left select-text">
+atayaa do tiguwanggg naka WHAAHAHAHAHAHA do HAHAHAHAHAHAAH wajud ko nag expect na mag ila ta do ayyy kay buang2 ragyud tu akong litmatch HUWAHAHAHAHAH tas wasad ko mag expect na mo abut ta ani ka closeeee WAHAHAHAHAHAH rag more than close na ni akoa do nimal man gyud kayka uy pa fall kaykang dako ataya ka bitaw uy hapoy birthdayyyyy g utro pa nako ning letter kay naa man kas hospital nya last letter ani kay ma mu2 unta ka pero ako nalang g ilisan maynalang dika ma baan gamay bitaw do ayu2 dihaa wani period2 or comma2 kay straight na ni kay nabuang kog debug WAHAHAHAHA ayu2 diha do sag buang2 ko minaw jud kos imo usahay Happy birthday do unta maayu lang padayun lang ayg laom kay dina goods ayaw sig ingug patay kay nananananana padayun ayawg ka stress anang mga demown nag samok2 saimo except sa akoa do happy birthday ampinggg ka permi2 mwa2 ka ni meta ai WAHAHAHAH do amping mao rman ata tas goods lang minaw naka nako dapat ampingi na imong kaugalingon dara kay wapako ka pakong nimo and mura tu byersss di unta ka crushback para pariha ta mwa WAHAHAHAHAHAHAH p birthday dooooo amping kanunay
+                </p>
+            </div>
+
+            <button onclick="triggerConfetti()" class="w-full btn-minimal text-sm py-3.5">
+                tuploka do diba naay lupad2
+            </button>
+        </section>
+
+    </main>
+
+    <script>
+        let activeCard = 1;
+
+        function goToCard(cardNumber) {
+            document.getElementById(`card${activeCard}`).classList.add('hidden');
+            document.getElementById(`card${cardNumber}`).classList.remove('hidden');
+            activeCard = cardNumber;
+
+            if (cardNumber === 6) {
+                triggerConfetti();
+            }
+        }
+
+        function evadeNoButton() {
+            const btn = document.getElementById('evasiveNoBtn');
+            const padding = 30;
+            const maxX = window.innerWidth - btn.offsetWidth - padding;
+            const maxY = window.innerHeight - btn.offsetHeight - padding;
+
+            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+
+            btn.style.position = 'fixed';
+            btn.style.left = `${randomX}px`;
+            btn.style.top = `${randomY}px`;
+            btn.style.zIndex = '9999';
+        }
+
+        function handleCard4Submit(e) {
+            e.preventDefault();
+            goToCard(5);
+        }
+
+        function selectColor(el) {
+            document.querySelectorAll('.color-dot').forEach(dot => dot.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        function triggerConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 60,
+                origin: { y: 0.6 },
+                colors: ['#D8B4FE', '#E9D5FF', '#C084FC', '#2E2B38']
+            });
+        }
+    </script>
+</body>
+</html>
